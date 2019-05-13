@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+{% block main %}
+  <form action="" method="post" name="search">
+                        {{ form.csrf_token }}
+                        <div>
+                            <p>Author:</p>
+                           {{ form.author() }}
+                            <p>Category:</p>
+                           {{ form.category() }}
+                        </div>
+                        <br>
+                           <button>Import</button>
+                     </form>
+{% endblock %}

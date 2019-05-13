@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+{% block main %}
+  <form action="" method="post" name="import">
+                        {{ form.csrf_token }}
+                        <div>
+                            <p>Title:</p>
+                           {{ form.title() }}
+                            <p>Author:</p>
+                           {{ form.author() }}
+
+                            <p>Category:</p>
+                           {{ form.category() }}
+                            <p>Description:</p>
+                           {{ form.description() }}
+                        </div>
+                        <div>
+                           <button>Add</button>
+                        </div>
+                     </form>
+{% endblock %}
