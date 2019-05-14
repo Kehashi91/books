@@ -13,7 +13,7 @@ def instantiate_app(config_name):
     config[config_name].init_app(app)
     db.init_app(app)
 
-    from .routes import books as books_blueprint
+    from .routes import gobooks as books_blueprint
     app.register_blueprint(books_blueprint)
 
     return app

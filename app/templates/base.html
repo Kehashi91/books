@@ -1,26 +1,23 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Goobooks</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/">
-    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="/list">List books</a>
-    <a class="p-2 text-dark" href="/import">Import Books</a>
-    <a class="p-2 text-dark" href="/add">Add Book</a>
-  </nav>
-</div>
-
-<div class="container">
-        {% block main %}
-        {% endblock %}
-
-  </div>
-</body>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Goobooks</title>
+      <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/">
+      <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   </head>
+   <body>
+      <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+         <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="/list">List books</a>
+            <a class="p-2 text-dark" href="/import">Import Books</a>
+            <a class="p-2 text-dark" href="/add">Add Book</a>
+         </nav>
+      </div>
+      <div class="container">
+         {% block main %}
+         {% endblock %}
+      </div>
+   </body>
 </html>

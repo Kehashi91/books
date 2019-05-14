@@ -1,15 +1,26 @@
-
 {% extends "base.html" %}
 {% block main %}
-  <form action="" method="post" name="search">
-                        {{ form.csrf_token }}
-                        <div>
-                            <p>Author:</p>
-                           {{ form.author() }}
-                            <p>Category:</p>
-                           {{ form.category() }}
-                        </div>
-                        <br>
-                           <button>Import</button>
-                     </form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div>
+   {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<br/>
+<p>Note: Importing takes time as the app follows pagination from requests. You will be prompted when it finishes.</p>
+<form action="" method="post" name="search">
+   {{ form.csrf_token }}
+   <div>
+      <p>Author:</p>
+      {{ form.author() }}
+      <p>Keywords:</p>
+      {{ form.category() }}
+      <br>
+   </div>
+   <br>
+   <button>Import</button>
+</form>
 {% endblock %}

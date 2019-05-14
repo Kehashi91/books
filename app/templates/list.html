@@ -1,39 +1,60 @@
-
 {% extends "base.html" %}
 {% block main %}
-  <form action="" method="post" name="search">
-                        {{ form.csrf_token }}
-                        <div>
-                            <p>Author:</p>
-                           {{ form.author() }}
-                            <p>Category:</p>
-                           {{ form.category() }}
-                        </div>
-                        <br>
-                           <button>Search</button>
-                     </form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div>
+   {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<br/>
+<form action="" method="post" name="search">
+   {{ form.csrf_token }}
+   <div>
+      <p>Author:</p>
+      {{ form.author() }}
+      <p>Category:</p>
+      {{ form.category() }}
+   </div>
+   <br>
+   <button>Search</button>
+</form>
+</br>
+<div>
+   {% if prev_page %}
+   <a href="{{ prev_page }}">Previous page</a>
+   {% endif %}
+   {% if next_page %}
+   <a href="{{ next_page }}">Next page</a>
+   {% endif %}
+</div>
 </br>
 <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">id</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Author/s</th>
-      <th scope="col">Category/ies</th>
-    </tr>
-  </thead>
-  <tbody>
-       {% for book in books %}
-                    <tr>
-      <td>{{ book.book_id }}</td>
-      <td>{{ book.name }}</td>
-      <td>{{ book.description }}</td>
-            <td>{% for author in book.authors %}{{ author.name }}{{ ", " if not loop.last }}{% endfor %}</td>
-            <td>{% for category in book.categories %}{{ category.name }}{{ ", " if not loop.last }}{% endfor %}</td>
-
-    </tr>
-               {% endfor %}
-  </tbody>
+   <thead>
+      <tr>
+         <th scope="col">Title</th>
+         <th scope="col">Description</th>
+         <th scope="col">Author/s</th>
+         <th scope="col">Category/ies</th>
+      </tr>
+   </thead>
+   <tbody>
+      {% for book in books.items %}
+      <tr>
+         <td>{{ book.title }}</td>
+         <td>{{ book.description }}</td>
+         <td>{% for author in book.authors %}<a href="{{ url_for('gobooks.list_books', author=author.name)}}">
+            {{ author.name }}{{ ", " if not loop.last }}
+            </a>{% endfor %}
+         </td>
+         <td>{% for category in book.categories %}<a href="{{ url_for('gobooks.list_books', category=category.name)}}">
+            {{ category.name }}{{ ", " if not loop.last }}
+            </a>{% endfor %}
+         </td>
+      </tr>
+      {% endfor %}
+   </tbody>
 </table>
 {% endblock %}
