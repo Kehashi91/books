@@ -58,39 +58,36 @@ class Book(db.Model):
         else:
             return book_id
 
-class Author(db.Model):
+
+class GetOrInsertMixin:
+    """
+    Mixin for method shared by Author and Category
+    """
+    @classmethod
+    def get_or_insert(cls, query_to_check):
+        duplicate = cls.query.filter(cls.name == query_to_check).first()
+
+        if duplicate:
+            return duplicate
+        else:
+            return cls(name=query_to_check)
+
+
+class Author(GetOrInsertMixin, db.Model):
 
     __tablename__ = 'author'
     author_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, unique=True)
 
-    @classmethod
-    def get_or_insert(cls, author):
-        duplicate = Author.query.filter(Author.name == author).first()
-
-        if duplicate:
-            return duplicate
-        else:
-            return Author(name=author)
-
     def __repr__(self):
         return '<author {!r}>'.format(self.name)
 
 
-class Category(db.Model):
+class Category(GetOrInsertMixin, db.Model):
 
     __tablename__ = 'category'
     category_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, unique=True)
-
-    @classmethod
-    def get_or_insert(cls, category):
-        duplicate = Category.query.filter(Category.name == category).first()
-
-        if duplicate:
-            return duplicate
-        else:
-            return Category(name=category)
 
     def __repr__(self):
         return '<category {!r}>'.format(self.name)

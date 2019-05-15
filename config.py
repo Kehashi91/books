@@ -1,4 +1,6 @@
-"""Configuration file for class-based flask configuration."""
+"""
+todo: add more valid config options (prod and testing)
+"""
 
 import os
 
@@ -20,7 +22,6 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    DB_PASS = "test123"
     SQLALCHEMY_DATABASE_URI = "postgresql://books:{}@localhost/books".format(Config.DB_PASS)
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 

@@ -35,15 +35,16 @@ def list_books():
         books = Book.query
     books = books.order_by(Book.added.desc()).paginate(page, 25, False)
 
+    # pagination
     prev_page = url_for('gobooks.list_books', author=author, category=category, page=books.prev_num)\
         if books.has_prev else None
-    next_page = url_for('gobooks.list_books', author=author, category=category, page=books.next_num) \
+    next_page = url_for('gobooks.list_books', author=author, category=category, page=books.next_num)\
         if books.has_next else None
 
     try:
         if form.validate_on_submit():
             author = form.author.data
-            category =  form.category.data
+            category = form.category.data
             return redirect(url_for('gobooks.list_books', author=author, category=category, page=page))
     except ValidationError as e:
         flash(e)
@@ -106,7 +107,7 @@ def import_books():
             db.session.commit()
 
             if len(books):
-                flash(f"Succesfuly imported {len(books)}! Encountered {duplicates} duplicate entries")
+                flash(f"Successfully imported {len(books)} books! Encountered {duplicates} duplicate entries")
             else:
                 flash(f"No books found! :(")
 
